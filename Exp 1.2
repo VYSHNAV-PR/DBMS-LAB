@@ -1,0 +1,34 @@
+1.2 DML COMMANDS
+    ------------ 
+      a) DML COMMANDS-INSERT
+
+        1.      Insert values in EMPLOYEE table.
+              insert into PERSON values("SM001","vyshnav","perintalmanna",2001,4123),("SM002","Hari","palakkad",2001,5649),("SM003","Nihal","Kozhikode",2001,2367);
+Query OK, 3 rows affected (0.06 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from PERSON;
++-------+---------+---------------+------+----------+
+| SSN   | name    | city          | dob  | adhar_no |
++-------+---------+---------------+------+----------+
+| SM001 | vyshnav | perintalmanna | 2001 |     4123 |
+| SM002 | Hari    | palakkad      | 2001 |     5649 |
+| SM003 | Nihal   | Kozhikode     | 2001 |     2367 |
++-------+---------+---------------+------+----------+
+3 rows in set (0.01 sec)
+
+ 2.      Insert values in STUDENT table.
+          mysql> insert into STUDENT values(12,"Vyshnav",22,"karthika house pmna","M"),(23,"nihal",22,"kozhikode","M"),(5,"anjana",22,"wayanad","F");
+Query OK, 3 rows affected (0.06 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from STUDENT;
++---------+---------+------+---------------------+--------+
+| roll_no | name    | age  | address             | gender |
++---------+---------+------+---------------------+--------+
+|       5 | anjana  |   22 | wayanad             | F      |
+|      12 | Vyshnav |   22 | karthika house pmna | M      |
+|      23 | nihal   |   22 | kozhikode           | M      |
++---------+---------+------+---------------------+--------+
+3 rows in set (0.00 sec)
+
