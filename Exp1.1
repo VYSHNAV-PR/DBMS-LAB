@@ -3,7 +3,7 @@ a) DDL COMMANDS-CREATE
 
 1.Create a table EMPLOYEE have the following fields (emp_id, name,city,dob,adhar_no)
  
-mysql> create table EMPLOYEE(emp_id int,name varchar(25),dob date,adhar_no int);
+mysql> create table EMPLOYEE(emp_id int,name varchar(25),city varchar(25),dob date,adhar_no int);
 Query OK, 0 rows affected (0.25 sec
 
 mysql> DESC EMPLOYEE;
@@ -43,7 +43,7 @@ mysql> desc STUDENT;
  3.Create a temporary table STUDENT1 of STUDENT relation.
  
  mysql> create temporary table STUDENT1 select * from STUDENT;
-Query OK, 0 rows affected (0.00 sec)
+Query OK, 0 rows affected (0.00 sec)Delete the NULL constraint of ‘age’ in the STUDENT table.
 Records: 0  Duplicates: 0  Warnings: 0
 
 mysql> desc STUDENT1;
