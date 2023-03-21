@@ -370,3 +370,98 @@ mysql> select * from invoice_item;
 |   1245 |  335 |        1 |
 +--------+------+----------+
 7 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------------------
+
+c) DML COMMAND- DELETE
+-----------------------
+
+1. Delete the record of customer id ‘102’
+-----------------------------------------
+
+mysql> delete from invoice_item where inv_id=1245;
+Query OK, 2 rows affected (0.05 sec)
+
+mysql> delete from invoice_master where inv_id=1245;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> delete from Customer where id=102;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from Customer;
++-----+---------+-------------------+------------+------------+
+| id  | name    | address           | city       | ph_no      |
++-----+---------+-------------------+------------+------------+
+| 100 | Vyshnav | karthika house    | malappuram | 9645546800 |
+| 101 | Hari    | kuzhithara  house | palakkad   | 8156850040 |
+| 103 | aswin   | dream villa       | calicut    |       NULL |
+| 104 | vishnu  | dream house       | calicut    |       NULL |
+| 105 | maanas  | pullikalhouse     | calicut    |       NULL |
+| 106 | hiba    | pa house          | kannur     | 9846672312 |
++-----+---------+-------------------+------------+------------+
+6 rows in set (0.00 sec)
+
+2. Delete all purchase details of items its quantity less than 2
+----------------------------------------------------------------
+
+mysql> delete from invoice_item where quantity<2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1002 |  301 |        2 |
+|   1002 |  313 |        4 |
+|   1002 |  334 |        3 |
+|   1212 |  339 |       20 |
+|   1729 |  415 |        5 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
+3. Delete the purchase details of product ‘pen’ in the in_id ‘202235’
+------------------------------------------------------------------
+
+mysql> delete from invoice_item where inv_id=1002 and pid=313;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1002 |  301 |        2 |
+|   1002 |  334 |        3 |
+|   1212 |  339 |       20 |
+|   1729 |  415 |        5 |
++--------+------+----------+
+4 rows in set (0.00 sec)
+
+
+4. Delete details of customer who does not have phone number.
+--------------------------------------------------------------
+
+mysql> delete from Customer where ph_no is NULL;
+Query OK, 3 rows affected (0.04 sec)
+
+mysql> select * from Customer;
++-----+---------+-------------------+------------+------------+
+| id  | name    | address           | city       | ph_no      |
++-----+---------+-------------------+------------+------------+
+| 100 | Vyshnav | karthika house    | malappuram | 9645546800 |
+| 101 | Hari    | kuzhithara  house | palakkad   | 8156850040 |
+| 106 | hiba    | pa house          | kannur     | 9846672312 |
++-----+---------+-------------------+------------+------------+
+3 rows in set (0.00 sec)
+
+5. Delete all records from STUDENT table
+-----------------------------------------
+
+mysql> use DBMS;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> delete from STUDENT;
+Query OK, 3 rows affected (0.05 sec)
+
+mysql> select * from STUDENT;
+Empty set (0.00 sec)
