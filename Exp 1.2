@@ -32,3 +32,168 @@ mysql> select * from STUDENT;
 +---------+---------+------+---------------------+--------+
 3 rows in set (0.00 sec)
 
+-------------------------------------------------------------------------------------------------------------------------
+
+3.Insert values in INVOICE database. 
+
+mysql> USE INVOICE;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+
+->CUSTOMER TABLE
+--------------
+
+
+mysql> insert into Customer values(100,"Vyshnav","karthika house","malappuram",9645546800);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into Customer values(101,"Hari","kuzhithara  house","palakkad",8156850040);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into Customer values(102,"karthik","pallikal house ","malappuram",9048018588);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into Customer(id,name,address,city)  values(103,"aswin","dream villa","kozhikode");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into Customer(id,name,address,city)  values(104,"vishnu","dream house","kozhikode");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into Customer(id,name,address,city)  values(105,"maanas","pullikalhouse","kozhikode");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into Customer values(106,"hiba","pa house ","kannur",9846672312);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from Customer;
++-----+---------+-------------------+------------+------------+
+| id  | name    | address           | city       | ph_no      |
++-----+---------+-------------------+------------+------------+
+| 100 | Vyshnav | karthika house    | malappuram | 9645546800 |
+| 101 | Hari    | kuzhithara  house | palakkad   | 8156850040 |
+| 102 | karthik | pallikal house    | malappuram | 9048018588 |
+| 103 | aswin   | dream villa       | kozhikode  |       NULL |
+| 104 | vishnu  | dream house       | kozhikode  |       NULL |
+| 105 | maanas  | pullikalhouse     | kozhikode  |       NULL |
+| 106 | hiba    | pa house          | kannur     | 9846672312 |
++-----+---------+-------------------+------------+------------+
+7 rows in set (0.00 sec)
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+->PRODUCT TABLE
+ --------------
+
+
+mysql> insert into product values(301,"chochlate",15);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into product values(313,"lexxi",45);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into product values(335,"boomer",5);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into product values(334,"basumathi rice",90);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into product values(339,"ashirvad atta",140);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into product values(402,"onion",120);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into product values(415,"lays",20);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from product;
++-----+----------------+-------+
+| pid | pname          | price |
++-----+----------------+-------+
+| 301 | chochlate      |    15 |
+| 313 | lexxi          |    45 |
+| 334 | basumathi rice |    90 |
+| 335 | boomer         |     5 |
+| 339 | ashirvad atta  |   140 |
+| 402 | onion          |   120 |
+| 415 | lays           |    20 |
++-----+----------------+-------+
+7 rows in set (0.00 sec)
+
+->INVOICE MASTER TABLE
+  ------------------
+
+mysql> insert into invoice_master values(1002,100,"2023-02-20");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_master values(1212,101,"2023-02-25");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into invoice_master values(1245,102,"2023-02-12");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into invoice_master values(1467,100,"2023-01-10");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into invoice_master values(1489,104,"2023-01-17");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into invoice_master values(1510,101,"2023-04-25");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_master values(1729,100,"2023-04-21");
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1002 |     100 | 2023-02-20 |
+|   1212 |     101 | 2023-02-25 |
+|   1245 |     102 | 2023-02-12 |
+|   1467 |     100 | 2023-01-10 |
+|   1489 |     104 | 2023-01-17 |
+|   1510 |     101 | 2023-04-25 |
+|   1729 |     100 | 2023-04-21 |
++--------+---------+------------+
+7 rows in set (0.00 sec)
+
+->INVOICE ITEM TABLE
+  --------------------
+
+mysql> insert into invoice_item values(1002,301,2);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into invoice_item values(1002,313,4);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into invoice_item values(1002,334,3);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into invoice_item values(1212,339,1);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into invoice_item values(1729,415,5);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into invoice_item values(1245,402,3);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into invoice_item values(1245,335,1);
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1002 |  301 |        2 |
+|   1002 |  313 |        4 |
+|   1002 |  334 |        3 |
+|   1212 |  339 |        1 |
+|   1729 |  415 |        5 |
+|   1245 |  402 |        3 |
+|   1245 |  335 |        1 |
++--------+------+----------+
+7 rows in set (0.00 sec)
