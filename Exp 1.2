@@ -197,3 +197,176 @@ mysql> select * from invoice_item;
 |   1245 |  335 |        1 |
 +--------+------+----------+
 7 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------------------------------------------------------
+
+b)DML COMMANDS- UPDATE
+-----------------------
+
+
+1. Update the price of a particular product.
+-------------------------------------------
+
+
+mysql> update product set price=155 where pid=339;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update product set price=25 where pid=415;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from product;
++-----+----------------+-------+
+| pid | pname          | price |
++-----+----------------+-------+
+| 301 | chochlate      |    15 |
+| 313 | lexxi          |    45 |
+| 334 | basumathi rice |    90 |
+| 335 | boomer         |     5 |
+| 339 | ashirvad atta  |   155 |
+| 402 | onion          |   120 |
+| 415 | lays           |    25 |
++-----+----------------+-------+
+7 rows in set (0.00 sec)
+
+
+2. Change the name of city ‘kozhikode’ to ‘calicut’ in the customer table. 
+-------------------------------------------------------------------------
+
+mysql> select * from Customer;
++-----+---------+-------------------+------------+------------+
+| id  | name    | address           | city       | ph_no      |
++-----+---------+-------------------+------------+------------+
+| 100 | Vyshnav | karthika house    | malappuram | 9645546800 |
+| 101 | Hari    | kuzhithara  house | palakkad   | 8156850040 |
+| 102 | karthik | pallikal house    | malappuram | 9048018588 |
+| 103 | aswin   | dream villa       | kozhikode  |       NULL |
+| 104 | vishnu  | dream house       | kozhikode  |       NULL |
+| 105 | maanas  | pullikalhouse     | kozhikode  |       NULL |
+| 106 | hiba    | pa house          | kannur     | 9846672312 |
++-----+---------+-------------------+------------+------------+
+7 rows in set (0.00 sec)
+
+mysql> update Customer set city='calicut' where city='kozhikode';
+Query OK, 3 rows affected (0.05 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from Customer;
++-----+---------+-------------------+------------+------------+
+| id  | name    | address           | city       | ph_no      |
++-----+---------+-------------------+------------+------------+
+| 100 | Vyshnav | karthika house    | malappuram | 9645546800 |
+| 101 | Hari    | kuzhithara  house | palakkad   | 8156850040 |
+| 102 | karthik | pallikal house    | malappuram | 9048018588 |
+| 103 | aswin   | dream villa       | calicut    |       NULL |
+| 104 | vishnu  | dream house       | calicut    |       NULL |
+| 105 | maanas  | pullikalhouse     | calicut    |       NULL |
+| 106 | hiba    | pa house          | kannur     | 9846672312 |
++-----+---------+-------------------+------------+------------+
+7 rows in set (0.00 sec)
+
+3. Update all prices with 2% of its original price
+--------------------------------------------------
+
+
+mysql> select * from product;
++-----+----------------+-------+
+| pid | pname          | price |
++-----+----------------+-------+
+| 301 | chochlate      |    15 |
+| 313 | lexxi          |    45 |
+| 334 | basumathi rice |    90 |
+| 335 | boomer         |     5 |
+| 339 | ashirvad atta  |   155 |
+| 402 | onion          |   120 |
+| 415 | lays           |    25 |
++-----+----------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> update product set price=price-(price*2/100);
+Query OK, 4 rows affected (0.05 sec)
+Rows matched: 7  Changed: 4  Warnings: 0
+
+mysql> select * from product;
++-----+----------------+-------+
+| pid | pname          | price |
++-----+----------------+-------+
+| 301 | chochlate      |    15 |
+| 313 | lexxi          |    44 |
+| 334 | basumathi rice |    88 |
+| 335 | boomer         |     5 |
+| 339 | ashirvad atta  |   152 |
+| 402 | onion          |   118 |
+| 415 | lays           |    25 |
++-----+----------------+-------+
+7 rows in set (0.00 sec)
+
+4. Change the address, city, phone number of a particular customer. 
+------------------------------------------------------------------
+
+mysql> select * from Customer;
++-----+---------+-------------------+------------+------------+
+| id  | name    | address           | city       | ph_no      |
++-----+---------+-------------------+------------+------------+
+| 100 | Vyshnav | karthika house    | malappuram | 9645546800 |
+| 101 | Hari    | kuzhithara  house | palakkad   | 8156850040 |
+| 102 | karthik | pallikal house    | malappuram | 9048018588 |
+| 103 | aswin   | dream villa       | calicut    |       NULL |
+| 104 | vishnu  | dream house       | calicut    |       NULL |
+| 105 | maanas  | pullikalhouse     | calicut    |       NULL |
+| 106 | hiba    | pa house          | kannur     | 9846672312 |
++-----+---------+-------------------+------------+------------+
+7 rows in set (0.00 sec)
+
+mysql> update Customer set address='palazhi house',city='idukki',ph_no=8921567891 where id=102;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Customer;
++-----+---------+-------------------+------------+------------+
+| id  | name    | address           | city       | ph_no      |
++-----+---------+-------------------+------------+------------+
+| 100 | Vyshnav | karthika house    | malappuram | 9645546800 |
+| 101 | Hari    | kuzhithara  house | palakkad   | 8156850040 |
+| 102 | karthik | palazhi house     | idukki     | 8921567891 |
+| 103 | aswin   | dream villa       | calicut    |       NULL |
+| 104 | vishnu  | dream house       | calicut    |       NULL |
+| 105 | maanas  | pullikalhouse     | calicut    |       NULL |
+| 106 | hiba    | pa house          | kannur     | 9846672312 |
++-----+---------+-------------------+------------+------------+
+7 rows in set (0.00 sec)
+
+5. Change the quantity of a purchased product of any inv_id.
+-----------------------------------------------------------
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1002 |  301 |        2 |
+|   1002 |  313 |        4 |
+|   1002 |  334 |        3 |
+|   1212 |  339 |        1 |
+|   1729 |  415 |        5 |
+|   1245 |  402 |        3 |
+|   1245 |  335 |        1 |
++--------+------+----------+
+7 rows in set (0.00 sec)
+
+mysql> update invoice_item set quantity=20 where inv_id=1212 and pid=339;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1002 |  301 |        2 |
+|   1002 |  313 |        4 |
+|   1002 |  334 |        3 |
+|   1212 |  339 |       20 |
+|   1729 |  415 |        5 |
+|   1245 |  402 |        3 |
+|   1245 |  335 |        1 |
++--------+------+----------+
+7 rows in set (0.00 sec)
