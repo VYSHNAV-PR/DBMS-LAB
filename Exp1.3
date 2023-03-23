@@ -1,0 +1,163 @@
+a) TCL COMMANDS
+           1.    Commit
+           2.    Rollback
+           3.    Savepoint
+
+b) DCL COMMAND
+          Create two users user1, user2
+         1.      GRANT
+                    ->Give insert and select privilege to user 1 on customer table in the invoice database.
+                    ->Give update and delete privilege to user 2 on all tables in the invoice database.
+        2.      REVOKE
+                   ->Remove delete privilege of user 2.
+
+
+
+
+a) TCL COMMANDS
+
+1.Commit
+---------
+mysql> set autocommit=off;
+Query OK, 0 rows affected (0.00 sec)
+
+
+mysql> insert into PERSON(name,city,adhar_no) values("jithu","Munnar",5679);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from PERSON;
++-------+---------+---------------+------+----------+
+| SSN   | name    | city          | dob  | adhar_no |
++-------+---------+---------------+------+----------+
+| SM001 | vyshnav | perintalmanna | 2001 |     4123 |
+| SM002 | Hari    | palakkad      | 2001 |     5649 |
+| SM003 | Nihal   | Kozhikode     | 2001 |     2367 |
+| NULL  | jithu   | Munnar        | NULL |     5679 |
++-------+---------+---------------+------+----------+
+4 rows in set (0.00 sec)
+
+2.Rollback
+----------
+
+mysql> insert into PERSON values('SM011','kichu','trivandrum',2002,5698);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from PERSON;
++-------+---------+---------------+------+----------+
+| SSN   | name    | city          | dob  | adhar_no |
++-------+---------+---------------+------+----------+
+| SM001 | vyshnav | perintalmanna | 2001 |     4123 |
+| SM002 | Hari    | palakkad      | 2001 |     5649 |
+| SM003 | Nihal   | Kozhikode     | 2001 |     2367 |
+| SM015 | abhi    | kollam        | 2006 |     4534 |
+| SM010 | ponuus  | trivandrum    | 2004 |     5239 |
+| SM011 | kichu   | trivandrum    | 2002 |     5698 |
++-------+---------+---------------+------+----------+
+6 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from PERSON;
++-------+---------+---------------+------+----------+
+| SSN   | name    | city          | dob  | adhar_no |
++-------+---------+---------------+------+----------+
+| SM001 | vyshnav | perintalmanna | 2001 |     4123 |
+| SM002 | Hari    | palakkad      | 2001 |     5649 |
+| SM003 | Nihal   | Kozhikode     | 2001 |     2367 |
+| SM015 | abhi    | kollam        | 2006 |     4534 |
+| SM010 | ponuus  | trivandrum    | 2004 |     5239 |
++-------+---------+---------------+------+----------+
+5 rows in set (0.00 sec)
+
+
+3.Savepoint
+-----------
+
+mysql> savepoint s1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into PERSON values('SM013','abhishek','kasargod',2010,4589);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint s2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into PERSON values('SM018','balan','koratti',2011,8900);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint s3;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from PERSON;
++-------+----------+---------------+------+----------+
+| SSN   | name     | city          | dob  | adhar_no |
++-------+----------+---------------+------+----------+
+| SM001 | vyshnav  | perintalmanna | 2001 |     4123 |
+| SM002 | Hari     | palakkad      | 2001 |     5649 |
+| SM003 | Nihal    | Kozhikode     | 2001 |     2367 |
+| SM015 | abhi     | kollam        | 2006 |     4534 |
+| SM010 | ponuus   | trivandrum    | 2004 |     5239 |
+| SM012 | parvathy | alappuzha     | 2009 |     6745 |
+| SM013 | abhishek | kasargod      | 2010 |     4589 |
+| SM018 | balan    | koratti       | 2011 |     8900 |
++-------+----------+---------------+------+----------+
+8 rows in set (0.01 sec)
+
+mysql> rollback to s1;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from PERSON;
++-------+----------+---------------+------+----------+
+| SSN   | name     | city          | dob  | adhar_no |
++-------+----------+---------------+------+----------+
+| SM001 | vyshnav  | perintalmanna | 2001 |     4123 |
+| SM002 | Hari     | palakkad      | 2001 |     5649 |
+| SM003 | Nihal    | Kozhikode     | 2001 |     2367 |
+| SM015 | abhi     | kollam        | 2006 |     4534 |
+| SM010 | ponuus   | trivandrum    | 2004 |     5239 |
+| SM012 | parvathy | alappuzha     | 2009 |     6745 |
++-------+----------+---------------+------+----------+
+6 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
+                                                   
+					        ***DCL COMMAND***
+
+
+
+Create two users user1, user2
+1.GRANT
+  ->Give insert and select privilege to user 1 on customer table in the invoice database.
+  ->Give update and delete privilege to user 2 on all tables in the invoice database.
+
+
+mysql> CREATE USER 'USER1'@'localhost' IDENTIFIED BY 'pass12';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE USER 'USER2'@'localhost' IDENTIFIED BY 'pass34';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> GRANT INSERT,SELECT ON Customer TO 'USER1'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> GRANT DELETE,UPDATE  ON invoice.* TO 'USER2'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+
+2.      REVOKE
+                   ->Remove delete privilege of user 2.
+
+
+mysql> REVOKE DELETE ON invoice.* from 'USER2'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> 
+
+//COMPLETED
