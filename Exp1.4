@@ -1,0 +1,128 @@
+1.4)
+     1. List all customer details.
+      ----------------------------
+
+       mysql> select * from Customer;
++-----+---------+-------------------+------------+------------+
+| id  | name    | address           | city       | ph_no      |
++-----+---------+-------------------+------------+------------+
+| 100 | Vyshnav | karthika house    | malappuram | 9645546800 |
+| 101 | Hari    | kuzhithara  house | palakkad   | 8156850040 |
+| 106 | hiba    | pa house          | kannur     | 9846672312 |
++-----+---------+-------------------+------------+------------+
+3 rows in set (0.00 sec)
+
+ 
+  2.    List pname, price of all products.
+  ----------------------------------------
+   
+
+   mysql> select pname,price from product;
++----------------+-------+
+| pname          | price |
++----------------+-------+
+| chochlate      |    15 |
+| lexxi          |    44 |
+| basumathi rice |    88 |
+| boomer         |     5 |
+| ashirvad atta  |   152 |
+| onion          |   118 |
+| lays           |    25 |
++----------------+-------+
+7 rows in set (0.00 sec)
+
+3.    List all invoice items, avoid duplicates.
+-----------------------------------------------
+ 
+mysql> select distinct inv_id from invoice_item;
++--------+
+| inv_id |
++--------+
+|   1212 |
+|   1567 |
+|   2190 |
++--------+
+3 rows in set (0.02 sec)
+
+4.    List product price between 50rs and 150rs
+-----------------------------------------------
+
+ysql> select price from product where price between 70 and 160;
++-------+
+| price |
++-------+
+|    88 |
+|   152 |
+|   118 |
++-------+
+3 rows in set (0.00 sec)
+
+5.    List the customer details who lives in ‘ekm’,’tvm’.
+---------------------------------------------------------
+
+ mysql> select * from Customer where city in('ernakulam','trivandrum');
++-----+-------+-----------------+------------+------------+
+| id  | name  | address         | city       | ph_no      |
++-----+-------+-----------------+------------+------------+
+| 110 | kuttu | kalpatta house  | ernakulam  | 7981345671 |
+| 111 | tuttu | sarovaram house | ernakulam  | 8945673412 |
+| 115 | bheem | sarovaram house | trivandrum | 9057461312 |
++-----+-------+-----------------+------------+------------+
+3 rows in set (0.00 sec)
+
+6.    List the invoice details from 1st January 2023 to 15th March 2023
+----------------------------------------------------------------------------
+
+ mysql> select * from invoice_master where inv_date between '2023-01-01' and '2023-03-15';
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1212 |     101 | 2023-02-25 |
+|   1567 |     106 | 2023-02-17 |
++--------+---------+------------+
+2 rows in set (0.00 sec)
+
+7.    List the customer details who not live in ‘tvm’.
+--------------------------------------------------------
+  
+ mysql> select * from Customer where city!='trivandrum';
++-----+---------+-------------------+------------+------------+
+| id  | name    | address           | city       | ph_no      |
++-----+---------+-------------------+------------+------------+
+| 100 | Vyshnav | karthika house    | malappuram | 9645546800 |
+| 101 | Hari    | kuzhithara  house | palakkad   | 8156850040 |
+| 106 | hiba    | pa house          | kannur     | 9846672312 |
+| 110 | kuttu   | kalpatta house    | ernakulam  | 7981345671 |
+| 111 | tuttu   | sarovaram house   | ernakulam  | 8945673412 |
++-----+---------+-------------------+------------+------------+
+5 rows in set (0.00 sec)
+
+8.    List the customers who have no phone number.
+-------------------------------------------------------
+
+ mysql> select * from Customer where ph_no is null;
++-----+--------+---------------+---------------+-------+
+| id  | name   | address       | city          | ph_no |
++-----+--------+---------------+---------------+-------+
+| 116 | binky  | vellila house | vellila       |  NULL |
+| 120 | minhaj | dreams house  | kunnamangalam |  NULL |
++-----+--------+---------------+---------------+-------+
+2 rows in set (0.00 sec)
+
+ 9.    Display customer names in descending order.
+----------------------------------------------------
+
+ mysql> select * from Customer order by name desc;
++-----+---------+-------------------+---------------+------------+
+| id  | name    | address           | city          | ph_no      |
++-----+---------+-------------------+---------------+------------+
+| 100 | Vyshnav | karthika house    | malappuram    | 9645546800 |
+| 111 | tuttu   | sarovaram house   | ernakulam     | 8945673412 |
+| 120 | minhaj  | dreams house      | kunnamangalam |       NULL |
+| 110 | kuttu   | kalpatta house    | ernakulam     | 7981345671 |
+| 106 | hiba    | pa house          | kannur        | 9846672312 |
+| 101 | Hari    | kuzhithara  house | palakkad      | 8156850040 |
+| 116 | binky   | vellila house     | vellila       |       NULL |
+| 115 | bheem   | sarovaram house   | trivandrum    | 9057461312 |
++-----+---------+-------------------+---------------+------------+
+8 rows in set (0.00 sec)
