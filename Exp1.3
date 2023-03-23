@@ -143,6 +143,37 @@ Query OK, 0 rows affected (0.00 sec)
 mysql> CREATE USER 'USER2'@'localhost' IDENTIFIED BY 'pass34';
 Query OK, 0 rows affected (0.00 sec)
 
+mysql> select user from mysql.user;
++------------------+
+| user             |
++------------------+
+| AKMIDHUN         |
+| MDN              |
+| MIDHUN           |
+| USER1            |
+| USER2            |
+| akmdn            |
+| akmdns           |
+| debian-sys-maint |
+| mdn              |
+| mdns             |
+| mysql.session    |
+| mysql.sys        |
+| new_user         |
+| phpmyadmin       |
+| root             |
+| uname            |
+| uname2           |
+| user             |
+| user1            |
+| user11           |
+| user2            |
+| user4            |
+| user7            |
++------------------+
+23 rows in set (0.00 sec)
+
+
 mysql> GRANT INSERT,SELECT ON Customer TO 'USER1'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 
