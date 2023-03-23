@@ -126,3 +126,49 @@ ysql> select price from product where price between 70 and 160;
 | 115 | bheem   | sarovaram house   | trivandrum    | 9057461312 |
 +-----+---------+-------------------+---------------+------------+
 8 rows in set (0.00 sec)
+
+10. Display the customer details sorted in ascending by city and descending by names.
+---------------------------------------------------------------------------------------
+
+ mysql> select * from Customer order by city asc,name desc;
++-----+----------+-------------------+---------------+------------+
+| id  | name     | address           | city          | ph_no      |
++-----+----------+-------------------+---------------+------------+
+| 111 | Arjun    | sarovaram house   | ernakulam     | 8945673412 |
+| 110 | antappan | kalpatta house    | ernakulam     | 7981345671 |
+| 106 | hiba     | pa house          | kannur        | 9846672312 |
+| 120 | minhaj   | dreams house      | kunnamangalam |       NULL |
+| 100 | kiran    | karthika house    | malappuram    | 9645546800 |
+| 101 | Hari     | kuzhithara  house | palakkad      | 8156850040 |
+| 115 | bheem    | sarovaram house   | trivandrum    | 9057461312 |
+| 116 | binky    | vellila house     | vellila       |       NULL |
++-----+----------+-------------------+---------------+------------+
+8 rows in set (0.00 sec)
+
+11. Find the customer names start with ‘A’.
+--------------------------------------------
+  mysql> select name from Customer where name like 'a%';
++----------+
+| name     |
++----------+
+| antappan |
+| Arjun    |
++----------+
+2 rows in set (0.00 sec)
+
+12. Find the customer names who have ‘e’ or ‘a’ in them.
+---------------------------------------------------------
+
+  mysql> select name from Customer where name like '%a%' or name like '%e%';
++----------+
+| name     |
++----------+
+| kiran    |
+| Hari     |
+| hiba     |
+| antappan |
+| Arjun    |
+| bheem    |
+| minhaj   |
++----------+
+7 rows in set (0.00 sec)
