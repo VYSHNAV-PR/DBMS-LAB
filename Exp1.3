@@ -177,8 +177,28 @@ mysql> select user from mysql.user;
 mysql> GRANT INSERT,SELECT ON Customer TO 'USER1'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 
+mysql> show grants for 'USER1' @'localhost';
++---------------------------------------------------------------------+
+| Grants for USER1@localhost                                          |
++---------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'USER1'@'localhost'                           |
+| GRANT SELECT, INSERT ON `INVOICE`.`Customer` TO 'USER1'@'localhost' |
++---------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+
 mysql> GRANT DELETE,UPDATE  ON invoice.* TO 'USER2'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for 'USER2' @'localhost';
++----------------------------------------------------+
+| Grants for USER2@localhost                         |
++----------------------------------------------------+
+| GRANT USAGE ON *.* TO 'USER2'@'localhost'          |
+| GRANT UPDATE ON `invoice`.* TO 'USER2'@'localhost' |
++----------------------------------------------------+
+2 rows in set (0.00 sec)
+
 
 mysql>
 
@@ -189,6 +209,14 @@ mysql>
 mysql> REVOKE DELETE ON invoice.* from 'USER2'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> 
+mysql> show grants for 'USER2'@'localhost';
++----------------------------------------------------+
+| Grants for USER2@localhost                         |
++----------------------------------------------------+
+| GRANT USAGE ON *.* TO 'USER2'@'localhost'          |
+| GRANT UPDATE ON `invoice`.* TO 'USER2'@'localhost' |
++----------------------------------------------------+
+2 rows in set (0.00 sec)
+
 
 //COMPLETED
