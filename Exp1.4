@@ -172,3 +172,47 @@ ysql> select price from product where price between 70 and 160;
 | minhaj   |
 +----------+
 7 rows in set (0.00 sec)
+
+13. Find the customer names who have at least 3 characters.
+-----------------------------------------------------------
+  mysql> select name from Customer where name like '___%';
++----------+
+| name     |
++----------+
+| kiran    |
+| Hari     |
+| hiba     |
+| antappan |
+| Arjun    |
+| bheem    |
+| binky    |
+| minhaj   |
++----------+
+8 rows in set (0.01 sec)
+
+14. List the names of customers their names have ‘r’ in second position.
+------------------------------------------------------------------
+
+  mysql> select name from Customer where name like '_r%';
++---------+
+| name    |
++---------+
+| aravind |
+| Arjun   |
++---------+
+2 rows in set (0.00 sec)
+
+15. Find the customer names start with ‘a’ and are at least 3 characters in length
+-------------------------------------------------------------------------------
+
+  mysql> select name from Customer where name like 'A__%';
++----------+
+| name     |
++----------+
+| aravind  |
+| antappan |
+| Arjun    |
++----------+
+3 rows in set (0.00 sec)
+
+//COMPLETED
