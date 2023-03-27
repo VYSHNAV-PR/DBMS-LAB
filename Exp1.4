@@ -112,19 +112,19 @@ ysql> select price from product where price between 70 and 160;
  9.    Display customer names in descending order.
 ----------------------------------------------------
 
- mysql> select * from Customer order by name desc;    //DISPLAY CUSTOMER NAMES ONLY
-+-----+---------+-------------------+---------------+------------+
-| id  | name    | address           | city          | ph_no      |
-+-----+---------+-------------------+---------------+------------+
-| 100 | Vyshnav | karthika house    | malappuram    | 9645546800 |
-| 111 | tuttu   | sarovaram house   | ernakulam     | 8945673412 |
-| 120 | minhaj  | dreams house      | kunnamangalam |       NULL |
-| 110 | kuttu   | kalpatta house    | ernakulam     | 7981345671 |
-| 106 | hiba    | pa house          | kannur        | 9846672312 |
-| 101 | Hari    | kuzhithara  house | palakkad      | 8156850040 |
-| 116 | binky   | vellila house     | vellila       |       NULL |
-| 115 | bheem   | sarovaram house   | trivandrum    | 9057461312 |
-+-----+---------+-------------------+---------------+------------+
+ mysql> select name from Customer order by name desc;
++----------+
+| name     |
++----------+
+| minhaj   |
+| hiba     |
+| Hari     |
+| binky    |
+| bheem    |
+| Arjun    |
+| aravind  |
+| antappan |
++----------+
 8 rows in set (0.00 sec)
 
 10. Display the customer details sorted in ascending by city and descending by names.
