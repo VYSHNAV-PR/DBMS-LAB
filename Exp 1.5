@@ -122,3 +122,199 @@ mysql> select * from invoice_item;
 1 row in set (0.03 sec)
 
 ---------------------------------------------------------------------------------------------------
+
+4. Find the product that has no sale.
+
+
+mysql> select * from product;
++-----+----------------+-------+
+| pid | pname          | price |
++-----+----------------+-------+
+| 301 | chochlate      |    15 |
+| 313 | lexxi          |    44 |
+
+| 334 | basumathi rice |    88 |
+| 335 | boomer         |     5 |
+| 339 | ashirvad atta  |   152 |
+| 402 | onion          |   118 |
+| 415 | lays           |    25 |
++-----+----------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1212 |  301 |        3 |
+|   1212 |  334 |        2 |
+|   1212 |  313 |        4 |
+|   2190 |  402 |        2 |
+|   2190 |  415 |        2 |
+|   1567 |  339 |        2 |
++--------+------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from product where pid not in(select pid from invoice_item);
++-----+--------+-------+
+| pid | pname  | price |
++-----+--------+-------+
+| 335 | boomer |     5 |
++-----+--------+-------+
+1 row in set (0.03 sec)
+
+--------------------------------------------------------------------------------
+
+5.List the customer names who purchased the items ‘chochlate’ and ‘lays’.
+
+mysql> select * from Customer;
++-----+----------+-------------------+---------------+------------+
+| id  | name     | address           | city          | ph_no      |
++-----+----------+-------------------+---------------+------------+
+| 100 | aravind  | karthika house    | malappuram    | 9645546800 |
+| 101 | Hari     | kuzhithara  house | palakkad      | 8156850040 |
+| 106 | hiba     | pa house          | kannur        | 9846672312 |
+| 110 | antappan | kalpatta house    | ernakulam     | 7981345671 |
+| 111 | Arjun    | sarovaram house   | ernakulam     | 8945673412 |
+| 115 | bheem    | sarovaram house   | trivandrum    | 9057461312 |
+| 116 | binky    | vellila house     | vellila       |       NULL |
+| 120 | minhaj   | dreams house      | kunnamangalam |       NULL |
++-----+----------+-------------------+---------------+------------+
+8 rows in set (0.00 sec)
+
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1212 |     101 | 2023-02-03 |
+|   1510 |     101 | 2023-04-25 |
+|   1567 |     106 | 2023-02-17 |
+|   2190 |     106 | 2023-04-19 |
++--------+---------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1212 |  301 |        3 |
+|   1212 |  334 |        2 |
+|   1212 |  313 |        4 |
+|   2190 |  402 |        2 |
+|   2190 |  415 |        2 |
+|   1567 |  339 |        2 |
+|   2190 |  301 |        2 |
+|   1212 |  415 |        4 |
+|   1567 |  301 |        1 |
+|   1567 |  415 |        1 |
++--------+------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from product;
++-----+----------------+-------+
+| pid | pname          | price |
++-----+----------------+-------+
+| 301 | chochlate      |    15 |
+| 313 | lexxi          |    44 |
+| 334 | basumathi rice |    88 |
+| 335 | boomer         |     5 |
+| 339 | ashirvad atta  |   152 |
+| 402 | onion          |   118 |
+| 415 | lays           |    25 |
++-----+----------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select name from Customer where id in(select cust_id from invoice_master
+where inv_id in(select inv_id from invoice_item where pid in(select pid from product where pname='chochlate' or(select pid from product where pname='lays'))));
++------+
+| name |
++------+
+| Hari |
+| hiba |
++------+
+2 rows in set (0.00 sec)
+
+----------------------------------------------------------------------
+
+6. Display the purchased product details of the customer ’SHYAM’.
+
+ mysql> select * from Customer;
++-----+----------+-------------------+---------------+------------+
+| id  | name     | address           | city          | ph_no      |
++-----+----------+-------------------+---------------+------------+
+| 100 | aravind  | karthika house    | malappuram    | 9645546800 |
+| 101 | Hari     | kuzhithara  house | palakkad      | 8156850040 |
+| 106 | hiba     | pa house          | kannur        | 9846672312 |
+| 110 | antappan | kalpatta house    | ernakulam     | 7981345671 |
+| 111 | Arjun    | sarovaram house   | ernakulam     | 8945673412 |
+| 115 | bheem    | sarovaram house   | trivandrum    | 9057461312 |
+| 116 | binky    | vellila house     | vellila       |       NULL |
+| 120 | minhaj   | dreams house      | kunnamangalam |       NULL |
++-----+----------+-------------------+---------------+------------+
+8 rows in set (0.00 sec)
+
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1212 |     101 | 2023-02-03 |
+|   1510 |     101 | 2023-04-25 |
+|   1567 |     106 | 2023-02-17 |
+|   2190 |     106 | 2023-04-19 |
++--------+---------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1212 |  301 |        3 |
+|   1212 |  334 |        2 |
+|   1212 |  313 |        4 |
+|   2190 |  402 |        2 |
+|   2190 |  415 |        2 |
+|   1567 |  339 |        2 |
++--------+------+----------+
+6 rows in set (0.00 sec)
+
+
+mysql> select * from product;
++-----+----------------+-------+
+| pid | pname          | price |
++-----+----------------+-------+
+| 301 | chochlate      |    15 |
+| 313 | lexxi          |    44 |
+| 334 | basumathi rice |    88 |
+| 335 | boomer         |     5 |
+| 339 | ashirvad atta  |   152 |
+| 402 | onion          |   118 |
+| 415 | lays           |    25 |
++-----+----------------+-------+
+7 rows in set (0.00 sec)
+
+  mysql> select pname,price from product where pid in(select pid from invoice_item where inv_id in(select inv_id from invoice_master where cust_id in(select id from Customer where name='hari')));
++----------------+-------+
+| pname          | price |
++----------------+-------+
+| chochlate      |    15 |
+| lexxi          |    44 |
+| basumathi rice |    88 |
+| lays           |    25 |
++----------------+-------+
+4 rows in set (0.01 sec)
+
+-------------------------------------------------------------------------------------
+
+7. List the names of all customers who have purchased at least 2 products, make sure that no duplicate names in the result.
+
+
+ mysql> select name from Customer where id in(select cust_id from invoice_master where inv_id in(select inv_id from invoice_item group by inv_id having count(inv_id)>=2));
++------+
+| name |
++------+
+| Hari |
+| hiba |
++------+
+2 rows in set (0.00 sec)
+//COMPLETED
