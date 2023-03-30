@@ -1,0 +1,40 @@
+1. Create a view for customers who have purchased products.
+
+
+mysql> select * from Customer;
++-----+----------+-------------------+---------------+------------+
+| id  | name     | address           | city          | ph_no      |
++-----+----------+-------------------+---------------+------------+
+| 100 | aravind  | karthika house    | malappuram    | 9645546800 |
+| 101 | Hari     | kuzhithara  house | palakkad      | 8156850040 |
+| 106 | hiba     | pa house          | kannur        | 9846672312 |
+| 110 | antappan | kalpatta house    | ernakulam     | 7981345671 |
+| 111 | Arjun    | sarovaram house   | ernakulam     | 8945673412 |
+| 115 | bheem    | sarovaram house   | trivandrum    | 9057461312 |
+| 116 | binky    | vellila house     | vellila       |       NULL |
+| 120 | minhaj   | dreams house      | kunnamangalam |       NULL |
++-----+----------+-------------------+---------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1212 |     101 | 2023-02-03 |
+|   1510 |     101 | 2023-04-25 |
+|   1567 |     106 | 2023-02-17 |
+|   2190 |     106 | 2023-04-19 |
++--------+---------+------------+
+4 rows in set (0.00 sec)
+
+mysql> create view Cust_view as select name from Customer where id in(select cust_id from invoice_master);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select * from Cust_view;
++------+
+| name |
++------+
+| Hari |
+| hiba |
++------+
+2 rows in set (0.02 sec)
