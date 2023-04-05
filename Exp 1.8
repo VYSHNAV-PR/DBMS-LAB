@@ -1,4 +1,63 @@
 1.8)
+      mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1212 |     101 | 2023-02-03 |
+|   1510 |     101 | 2023-04-25 |
+|   1567 |     106 | 2023-02-03 |
+|   2190 |     106 | 2023-02-03 |
++--------+---------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from product;
++-----+----------------+-------+
+| pid | pname          | price |
++-----+----------------+-------+
+| 301 | chochlate      |    15 |
+| 313 | lexxi          |    44 |
+| 334 | basumathi rice |    88 |
+| 335 | boomer         |     5 |
+| 339 | ashirvad atta  |   152 |
+| 402 | onion          |   118 |
+| 415 | lays           |    25 |
++-----+----------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1212 |  301 |        3 |
+|   1212 |  334 |        2 |
+|   1212 |  313 |        4 |
+|   2190 |  402 |        2 |
+|   2190 |  415 |        2 |
+|   1567 |  339 |        2 |
+|   2190 |  301 |        2 |
+|   1212 |  415 |        4 |
+|   1567 |  301 |        1 |
+|   1567 |  415 |        1 |
++--------+------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from Customer;
++-----+----------+-------------------+---------------+------------+
+| id  | name     | address           | city          | ph_no      |
++-----+----------+-------------------+---------------+------------+
+| 100 | aravind  | karthika house    | ernakulam     | 9645546800 |
+| 101 | Hari     | kuzhithara  house | ernakulam     | 8156850040 |
+| 106 | hiba     | pa house          | kannur        | 9846672312 |
+| 110 | antappan | kalpatta house    | ernakulam     | 7981345671 |
+| 111 | Arjun    | sarovaram house   | ernakulam     | 8945673412 |
+| 115 | bheem    | sarovaram house   | trivandrum    | 9057461312 |
+| 116 | binky    | vellila house     | vellila       |       NULL |
+| 120 | minhaj   | dreams house      | kunnamangalam |       NULL |
++-----+----------+-------------------+---------------+------------+
+8 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------------------------------------
+
+
 
    1.     List the product name and quantity of invoice items.
 
@@ -87,3 +146,4 @@ inner join invoice_master on Customer.id=invoice_master.cust_id inner join invoi
 +----------+----------------+--------+------------+
 17 rows in set (0.00 sec)
 
+//COMPLETED
