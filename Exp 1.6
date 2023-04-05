@@ -38,3 +38,29 @@ mysql> select * from Cust_view;
 | hiba |
 +------+
 2 rows in set (0.02 sec)
+
+--------------------------------------------------------------------------------------------------------
+2. Create a view for invoice products[cust_name, , inv_id, product_id, quantity]
+
+
+
+mysql> create view invoice_product as select Customer.name,invoice_master.inv_id,product.pid,invoice_item.quantity from Customer inner join invoice_master on Customer.id=invoice_master.cust_id inner join invoice_item on invoice_master.inv_id=invoice_item.inv_id inner join product on product.pid=invoice_item.pid;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select *  from invoice_product;
++------+--------+-----+----------+
+| name | inv_id | pid | quantity |
++------+--------+-----+----------+
+| Hari |   1212 | 301 |        3 |
+| Hari |   1212 | 334 |        2 |
+| Hari |   1212 | 313 |        4 |
+| hiba |   2190 | 402 |        2 |
+| hiba |   2190 | 415 |        2 |
+| hiba |   1567 | 339 |        2 |
+| hiba |   2190 | 301 |        2 |
+| Hari |   1212 | 415 |        4 |
+| hiba |   1567 | 301 |        1 |
+| hiba |   1567 | 415 |        1 |
++------+--------+-----+----------+
+10 rows in set (0.02 sec)
+//COMPLETED
