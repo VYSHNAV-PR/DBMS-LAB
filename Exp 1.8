@@ -1,0 +1,89 @@
+1.8)
+
+   1.     List the product name and quantity of invoice items.
+
+
+   mysql> select product.pname,invoice_item.quantity from product inner join invoice_item on product.pid=invoice_item.pid;
++----------------+----------+
+| pname          | quantity |
++----------------+----------+
+| chochlate      |        3 |
+| chochlate      |        2 |
+| chochlate      |        1 |
+| lexxi          |        4 |
+| basumathi rice |        2 |
+| ashirvad atta  |        2 |
+| onion          |        2 |
+| lays           |        2 |
+| lays           |        4 |
+| lays           |        1 |
++----------------+----------+
+10 rows in set (0.02 sec)
+
+--------------------------------------------------------------------------------------
+
+2.    Display invoice details of the transaction dated ’3-02-2023’.
+ 
+
+mysql> 
+ select Customer.name,product.pname,product.price,invoice_master.inv_id,invoice_master.inv_date,invoice_item.quantity from Customer inner join invoice_master on Customer.id=invoice_master.cust_id inner join invoice_item on invoice_master.inv_id=invoice_item.inv_id inner join product on product.pid=invoice_item.pid where inv_date='2023-02-03';
++------+----------------+-------+--------+------------+----------+
+| name | pname          | price | inv_id | inv_date   | quantity |
++------+----------------+-------+--------+------------+----------+
+| Hari | chochlate      |    15 |   1212 | 2023-02-03 |        3 |
+| Hari | basumathi rice |    88 |   1212 | 2023-02-03 |        2 |
+| Hari | lexxi          |    44 |   1212 | 2023-02-03 |        4 |
+| Hari | lays           |    25 |   1212 | 2023-02-03 |        4 |
+| hiba | ashirvad atta  |   152 |   1567 | 2023-02-03 |        2 |
+| hiba | chochlate      |    15 |   1567 | 2023-02-03 |        1 |
+| hiba | lays           |    25 |   1567 | 2023-02-03 |        1 |
+| hiba | onion          |   118 |   2190 | 2023-02-03 |        2 |
+| hiba | lays           |    25 |   2190 | 2023-02-03 |        2 |
+| hiba | chochlate      |    15 |   2190 | 2023-02-03 |        2 |
++------+----------------+-------+--------+------------+----------+
+10 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------
+
+3.    Display the customer name, product name, invoice date of purchased item ‘pen’.
+
+
+  mysql> select Customer.name,product.pname,invoice_master.inv_date from Customer
+inner join invoice_master on Customer.id=invoice_master.cust_id inner join invoice_item on invoice_master.inv_id=invoice_item.inv_id inner join product on product.pid=invoice_item.pid where pname='lexxi';
+
++------+-------+------------+
+| name | pname | inv_date   |
++------+-------+------------+
+| Hari | lexxi | 2023-02-03 |
++------+-------+------------+
+1 row in set (0.00 sec)
+
+--------------------------------------------------------------------------------------
+
+4.    Display all customer details and invoice details must include customer has not purchased items.
+
+
+ mysql> select Customer.name,product.pname,invoice_master.inv_id,invoice_master.inv_date from Customer left join invoice_master on Customer.id=invoice_master.cust_id left join invoice_item on invoice_master.inv_id=invoice_item.inv_id left join product on product.pid=invoice_item.pid;
++----------+----------------+--------+------------+
+| name     | pname          | inv_id | inv_date   |
++----------+----------------+--------+------------+
+| Hari     | chochlate      |   1212 | 2023-02-03 |
+| Hari     | basumathi rice |   1212 | 2023-02-03 |
+| Hari     | lexxi          |   1212 | 2023-02-03 |
+| hiba     | onion          |   2190 | 2023-02-03 |
+| hiba     | lays           |   2190 | 2023-02-03 |
+| hiba     | ashirvad atta  |   1567 | 2023-02-03 |
+| hiba     | chochlate      |   2190 | 2023-02-03 |
+| Hari     | lays           |   1212 | 2023-02-03 |
+| hiba     | chochlate      |   1567 | 2023-02-03 |
+| hiba     | lays           |   1567 | 2023-02-03 |
+| Hari     | NULL           |   1510 | 2023-04-25 |
+| aravind  | NULL           |   NULL | NULL       |
+| antappan | NULL           |   NULL | NULL       |
+| Arjun    | NULL           |   NULL | NULL       |
+| bheem    | NULL           |   NULL | NULL       |
+| binky    | NULL           |   NULL | NULL       |
+| minhaj   | NULL           |   NULL | NULL       |
++----------+----------------+--------+------------+
+17 rows in set (0.00 sec)
+
