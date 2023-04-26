@@ -1,0 +1,125 @@
+2.1)
+        1.      Create a procedure to display all tables in the invoice database.
+
+
+
+mysql> delimiter //
+
+ mysql> create procedure allinvoice5() begin select * from Customer;select * from invoice_item;select * from invoice_master;select * from product; end//
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> call allinvoice5();
+    -> //
++-----+----------+-------------------+---------------+------------+
+| id  | name     | address           | city          | ph_no      |
++-----+----------+-------------------+---------------+------------+
+| 100 | aravind  | karthika house    | ernakulam     | 9645546800 |
+| 101 | Hari     | kuzhithara  house | ernakulam     | 8156850040 |
+| 106 | hiba     | pa house          | kannur        | 9846672312 |
+| 110 | antappan | kalpatta house    | ernakulam     | 7981345671 |
+| 111 | Arjun    | sarovaram house   | ernakulam     | 8945673412 |
+| 115 | bheem    | sarovaram house   | trivandrum    | 9057461312 |
+| 116 | binky    | vellila house     | kochi         |       NULL |
+| 120 | minhaj   | dreams house      | kunnamangalam |       NULL |
++-----+----------+-------------------+---------------+------------+
+8 rows in set (0.00 sec)
+
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1212 |  301 |        3 |
+|   1212 |  334 |        2 |
+|   1212 |  313 |        4 |
+|   2190 |  402 |        2 |
+|   2190 |  415 |        2 |
+|   1567 |  339 |        2 |
+|   2190 |  301 |        2 |
+|   1212 |  415 |        4 |
+|   1567 |  301 |        1 |
+|   1567 |  415 |        1 |
++--------+------+----------+
+10 rows in set (0.00 sec)
+
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1212 |     101 | 2023-02-03 |
+|   1510 |     101 | 2023-04-25 |
+|   1567 |     106 | 2023-02-03 |
+|   2190 |     106 | 2023-02-03 |
++--------+---------+------------+
+4 rows in set (0.00 sec)
+
++-----+----------------+-------+
+| pid | pname          | price |
++-----+----------------+-------+
+| 301 | chochlate      |    20 |
+| 313 | lexxi          |    49 |
+| 334 | basumathi rice |    93 |
+| 335 | boomer         |    10 |
+| 339 | ashirvad atta  |   157 |
+| 402 | onion          |   123 |
+| 415 | lays           |    30 |
++-----+----------------+-------+
+7 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+------------------------------------------------------------------------------------------
+
+
+2.      Create a procedure to find greatest of 3 numbers.
+
+
+ mysql> create procedure greatest(a int, b int, c int)
+    -> begin
+    -> if(a>b) and (a>c) then
+    -> select a as 'greater';
+    -> elseif(b>c) and (b>a) then
+    -> select b as 'greater';
+    -> else
+    -> select c as 'greater';
+    -> end if;
+    -> end //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call greatest(20,30,100);//
++---------+
+| greater |
++---------+
+|     100 |
++---------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+-------------------------------------------------------------------------------------------
+
+3.      Create a procedure to display invoice details of a particular customer.
+
+
+mysql> create procedure invdetail(a varchar(35))
+    -> begin
+    -> select Customer.name,invoice_master.*,product.pname,invoice_item.pid,invoice_item.quantity from invoice_item inner join invoice_master on invoice_master.inv_id=invoice_item.inv_id inner join product on product.pid=invoice_item.pid inner join Customer on Customer.id=invoice_master.cust_id where Customer.name=a;
+    -> end
+    -> //
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> call invdetail('hiba')
+    -> //
++------+--------+---------+------------+---------------+------+----------+
+| name | inv_id | cust_id | inv_date   | pname         | pid  | quantity |
++------+--------+---------+------------+---------------+------+----------+
+| hiba |   2190 |     106 | 2023-02-03 | onion         |  402 |        2 |
+| hiba |   2190 |     106 | 2023-02-03 | lays          |  415 |        2 |
+| hiba |   1567 |     106 | 2023-02-03 | ashirvad atta |  339 |        2 |
+| hiba |   2190 |     106 | 2023-02-03 | chochlate     |  301 |        2 |
+| hiba |   1567 |     106 | 2023-02-03 | chochlate     |  301 |        1 |
+| hiba |   1567 |     106 | 2023-02-03 | lays          |  415 |        1 |
++------+--------+---------+------------+---------------+------+----------+
+6 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+//COMPLETED
