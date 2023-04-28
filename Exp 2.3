@@ -1,0 +1,105 @@
+2.3)
+       1. Create a trigger to handle updates to the customer table.
+
+
+
+
+
+ mysql> delimiter //
+mysql> create table cust(id int,name varchar(25),address varchar(25),city varchar(25),ph_no bigint);//
+Query OK, 0 rows affected (0.32 sec)
+
+
+ mysql> create trigger updates
+    -> before update
+    -> on Customer for each row
+    -> begin
+    -> insert into cust
+    -> values(old.id,old.name,old.address,old.city,old.ph_no);
+    -> end
+    -> //
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> select * from Customer;
+    -> //
++-----+----------+-------------------+---------------+------------+
+| id  | name     | address           | city          | ph_no      |
++-----+----------+-------------------+---------------+------------+
+| 100 | aravind  | karthika house    | ernakulam     | 9645546800 |
+| 101 | Hari     | kuzhithara  house | ernakulam     | 8156850040 |
+| 106 | hiba     | pa house          | kannur        | 9846672312 |
+| 110 | antappan | kalpatta house    | ernakulam     | 7981345671 |
+| 111 | Arjun    | sarovaram house   | ernakulam     | 8945673412 |
+| 115 | bheem    | sarovaram house   | trivandrum    | 9057461312 |
+| 116 | binky    | vellila house     | kochi         |       NULL |
+| 120 | minhaj   | dreams house      | kunnamangalam |       NULL |
++-----+----------+-------------------+---------------+------------+
+8 rows in set (0.00 sec)
+
+
+ mysql> update Customer set city="kozhikode" where id=106;
+    -> //
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from cust;
+    -> //
++------+------+-----------+--------+------------+
+| id   | name | address   | city   | ph_no      |
++------+------+-----------+--------+------------+
+|  106 | hiba | pa house  | kannur | 9846672312 |
++------+------+-----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from Customer;//
++-----+----------+-------------------+---------------+------------+
+| id  | name     | address           | city          | ph_no      |
++-----+----------+-------------------+---------------+------------+
+| 100 | aravind  | karthika house    | ernakulam     | 9645546800 |
+| 101 | Hari     | kuzhithara  house | ernakulam     | 8156850040 |
+| 106 | hiba     | pa house          | kozhikode     | 9846672312 |
+| 110 | antappan | kalpatta house    | ernakulam     | 7981345671 |
+| 111 | Arjun    | sarovaram house   | ernakulam     | 8945673412 |
+| 115 | bheem    | sarovaram house   | trivandrum    | 9057461312 |
+| 116 | binky    | vellila house     | kochi         |       NULL |
+| 120 | minhaj   | dreams house      | kunnamangalam |       NULL |
++-----+----------+-------------------+---------------+------------+
+8 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------------------------
+
+
+2. Create a trigger to handle inserts to the product relation ( if price < 30 the set price to 40).
+
+
+ mysql> create trigger product_price
+    -> before insert
+    -> on product
+    -> for each row
+    -> begin
+    -> if new.price < 30 then
+    -> set new.price=40;
+    -> end if;
+    -> end//
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> insert into product values(420,'carrot',7);
+    -> //
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from product;
+    -> //
++-----+----------------+-------+
+| pid | pname          | price |
++-----+----------------+-------+
+| 301 | chochlate      |    20 |
+| 313 | lexxi          |    49 |
+| 334 | basumathi rice |    93 |
+| 335 | boomer         |    10 |
+| 339 | ashirvad atta  |   157 |
+| 402 | onion          |   123 |
+| 415 | lays           |    30 |
+| 420 | carrot         |    40 |
++-----+----------------+-------+
+8 rows in set (0.00 sec)
+
+//COMPLETED
