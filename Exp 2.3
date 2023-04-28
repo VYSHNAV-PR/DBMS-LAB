@@ -68,7 +68,7 @@ mysql> select * from Customer;//
 -------------------------------------------------------------------------------------------------------
 
 
-2. Create a trigger to handle inserts to the product relation ( if price < 5 the set price to 40).
+2. Create a trigger to handle inserts to the product relation ( if price < 5 the set price to 10).
 
 
  mysql> create trigger product_price
@@ -77,7 +77,7 @@ mysql> select * from Customer;//
     -> for each row
     -> begin
     -> if new.price < 5 then
-    -> set new.price=40;
+    -> set new.price=10;
     -> end if;
     -> end//
 Query OK, 0 rows affected (0.07 sec)
@@ -98,7 +98,7 @@ mysql> select * from product;
 | 339 | ashirvad atta  |   157 |
 | 402 | onion          |   123 |
 | 415 | lays           |    30 |
-| 420 | carrot         |    40 |
+| 420 | carrot         |    10 |
 +-----+----------------+-------+
 8 rows in set (0.00 sec)
 
