@@ -20,11 +20,12 @@
 
 
  > db.CUSTOMER.aggregate([{$group:{_id:"$place",total:{$sum:1}}}])
-{ "_id" : "palakkad", "total" : 1 }
+{ "_id" : "trivandrum", "total" : 2 }
 { "_id" : "ernakulam", "total" : 1 }
-{ "_id" : "trivandrum", "total" : 1 }
+{ "_id" : "palakkad", "total" : 1 }
 { "_id" : "Kochi", "total" : 1 }
 > 
+
 
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -32,8 +33,8 @@
 3.  Write a MongoDB query to find minimum and maximum age in each city.
 
 
- > db.CUSTOMER.aggregate([{$group:{_id:"$place",max_age:{$max:"$age"},min_age:{$min:"$age"}}}])
-{ "_id" : "trivandrum", "max_age" : "55", "min_age" : "55" }
+> db.CUSTOMER.aggregate([{$group:{_id:"$place",max_age:{$max:"$age"},min_age:{$min:"$age"}}}])
+{ "_id" : "trivandrum", "max_age" : "55", "min_age" : "18" }
 { "_id" : "ernakulam", "max_age" : "24", "min_age" : "24" }
 { "_id" : "palakkad", "max_age" : "22", "min_age" : "22" }
 { "_id" : "Kochi", "max_age" : "22", "min_age" : "22" }
