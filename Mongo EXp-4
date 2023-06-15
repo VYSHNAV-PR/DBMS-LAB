@@ -1,0 +1,96 @@
+                            ASSIGNMENT NO-6-ADMINISTRATION
+                           --------------------------------
+
+
+1. Write a MongoDB query to create a user “CUSTOMER1” and grant the read role in the INVOICE database.
+
+
+> use admin
+switched to db admin
+> db.createUser({user:"Admin",pwd:"Vyshu",roles:[{role:"read",db:"INVOICE"},]})
+Successfully added user: {
+	"user" : "Admin",
+	"roles" : [
+		{
+			"role" : "read",
+			"db" : "INVOICE"
+		}
+	]
+}
+----------------------------------------------------------------------------------------
+
+2.      Write a MongoDB query to create the backup for the INVOICE database.
+
+
+ksb@ksb-OptiPlex-3060:~$ mongodump --db INVOICE
+2023-06-15T14:51:19.572+0530	writing INVOICE.PRODUCT to dump/INVOICE/PRODUCT.bson
+2023-06-15T14:51:19.661+0530	done dumping INVOICE.PRODUCT (5 documents)
+2023-06-15T14:51:19.694+0530	writing INVOICE.CUSTOMER to dump/INVOICE/CUSTOMER.bson
+2023-06-15T14:51:19.695+0530	done dumping INVOICE.CUSTOMER (5 documents)
+-------------------------------------------------------------------------------------------
+
+3.      Write a MongoDB query to restore a particular database or a collection.
+
+
+~$ mongodump --db INVOICE
+2023-06-15T14:51:19.572+0530	writing INVOICE.PRODUCT to dump/INVOICE/PRODUCT.bson
+2023-06-15T14:51:19.661+0530	done dumping INVOICE.PRODUCT (5 documents)
+2023-06-15T14:51:19.694+0530	writing INVOICE.CUSTOMER to dump/INVOICE/CUSTOMER.bson
+2023-06-15T14:51:19.695+0530	done dumping INVOICE.CUSTOMER (5 documents)
+
+
+> show dbs
+INVOICE  0.000GB
+abcd     0.000GB
+admin    0.000GB
+company  0.000GB
+config   0.000GB
+local    0.000GB
+midhun   0.000GB
+msd      0.000GB
+> 
+
+> use INVOICE
+switched to db INVOICE
+> db.dropDatabase()
+{ "dropped" : "INVOICE", "ok" : 1 }
+> 
+
+
+show dbs
+abcd     0.000GB
+admin    0.000GB
+company  0.000GB
+config   0.000GB
+local    0.000GB
+midhun   0.000GB
+msd      0.000GB
+
+
+ksb@ksb-OptiPlex-3060:~$ mongorestore --db INVOICE dump/INVOICE
+2023-06-15T14:59:45.756+0530	The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}
+2023-06-15T14:59:45.757+0530	building a list of collections to restore from dump/INVOICE dir
+2023-06-15T14:59:45.757+0530	reading metadata for INVOICE.PRODUCT from dump/INVOICE/PRODUCT.metadata.json
+2023-06-15T14:59:45.757+0530	reading metadata for INVOICE.CUSTOMER from dump/INVOICE/CUSTOMER.metadata.json
+2023-06-15T14:59:46.126+0530	restoring INVOICE.CUSTOMER from dump/INVOICE/CUSTOMER.bson
+2023-06-15T14:59:46.138+0530	finished restoring INVOICE.CUSTOMER (5 documents, 0 failures)
+2023-06-15T14:59:46.235+0530	restoring INVOICE.PRODUCT from dump/INVOICE/PRODUCT.bson
+2023-06-15T14:59:46.247+0530	finished restoring INVOICE.PRODUCT (5 documents, 0 failures)
+2023-06-15T14:59:46.247+0530	no indexes to restore for collection INVOICE.PRODUCT
+2023-06-15T14:59:46.247+0530	no indexes to restore for collection INVOICE.CUSTOMER
+2023-06-15T14:59:46.247+0530	10 document(s) restored successfully. 0 document(s) failed to restore.
+
+
+> show dbs
+INVOICE  0.000GB
+abcd     0.000GB
+admin    0.000GB
+company  0.000GB
+config   0.000GB
+local    0.000GB
+midhun   0.000GB
+msd      0.000GB
+> 
+
+
+//COMPLETED
